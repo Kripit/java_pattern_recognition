@@ -1,0 +1,13 @@
+# Local Java build output
+*.class
+bin/
+out/
+
+# Bundled JDK files are local tooling, not course material
+00-module-core/notes/oracleJdk-26/
+
+# IDE metadata
+.classpath
+.project
+.settings/
+.vscode/
