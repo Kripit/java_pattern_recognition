@@ -86,7 +86,7 @@ String text = builder.toString();
 
 ---
 
-## 2. Accessing characters
+## 2. Accessing characters -
 
 Use `charAt(index)` to read one character. String indexes start at 0, just like array indexes.
 
@@ -116,7 +116,7 @@ String changed = new String(chars); // "zbc"
 
 ---
 
-## 3. Characters and lowercase letters
+## 3. Characters and lowercase letters -
 
 Characters have numeric values underneath. For lowercase English letters, subtracting `'a'` gives a useful index from 0 to 25.
 
@@ -161,7 +161,7 @@ For interview problems, the important part is usually not memorizing ASCII value
 
 ---
 
-## 4. Common string patterns
+## 4. Common string patterns -
 
 ### Palindrome
 
