@@ -25,7 +25,7 @@ This is also useful groundwork for chunking text for RAG later on. Before splitt
 
 ---
 
-## 1. String immutability
+## 1. String immutability -
 
 Once a Java `String` is created, its contents cannot be changed. Methods that seem to modify a string actually return a new string.
 
