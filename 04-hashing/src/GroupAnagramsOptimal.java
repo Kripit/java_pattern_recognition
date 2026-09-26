@@ -46,7 +46,12 @@ public class GroupAnagramsOptimal {
 //If YES: skip creation entirely, just return the existing list already stored under key
 //Then .add(s) appends the current string onto whatever list got returned — either brand new or already-existing.
 
+//Edge Cases
+//Empty string in the array → sorts to "", becomes its own key, groups correctly with other empty strings.
+//All strings are anagrams of each other → everything collapses into one single group.
+//No two strings are anagrams → every string becomes its own group of size 1.
 
+// how ts works ->
 
 //map = {} (empty)
 
