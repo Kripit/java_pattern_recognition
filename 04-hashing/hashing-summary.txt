@@ -1,0 +1,25 @@
+Module 4 - Hashing Summary
+==========================
+
+Completed problems:
+- Contains Duplicate: use a HashSet to detect a value that has already appeared.
+- Group Anagrams: use a canonical character-count key to group words in a HashMap.
+- Longest Consecutive Sequence: use a HashSet and start counting only when num - 1 is absent.
+- Subarray Sum Equals K: use prefix sums and a HashMap of prefix-sum frequencies.
+
+Main recognition patterns:
+- Membership or duplicate check -> HashSet
+- Key to associated information -> HashMap
+- Count repeated values -> HashMap<value, count>
+- Count subarrays with a target sum -> prefix sum plus HashMap<sum, count>
+
+The two latest solutions are:
+- LongestConsecutiveOptimal.java: O(n) average time and O(n) extra space.
+- SubarraySumOptimal.java: O(n) time and O(n) extra space.
+
+Important details:
+- Hash-based operations are O(1) average, not a guaranteed worst-case bound.
+- Seed the prefix-sum map with 0 -> 1 so subarrays beginning at index 0 are counted.
+- For longest consecutive sequences, only expand from true sequence starts to avoid repeated work.
+
+Hashing module status: complete.
