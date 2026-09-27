@@ -29,3 +29,4 @@ public class ContainsDuplicateOptimize {
     }
     
 }
+// pattern is same as the idea of the solution no need to learn more for this easy answer 
