@@ -7,42 +7,79 @@
 
 //“Contiguous subarray sum” → prefix sums (Module 2). But now we need to count how many pairs of prefix sums differ by exactly k — that “how many have I seen” question is a HashMap storing prefix sum → count of times seen
 
-
 import java.util.*;
 
 public class SubarraySumOptimal {
+
     public static void main(String[] args) {
         int[] nums = {1, 1, 1};
+
         int k = 2;
-        System.out.println(subarraySum(nums, k)); // 2
+        System.out.println("Total subarrays: " + subarraySum(nums, k));
     }
 
     public static int subarraySum(int[] nums, int k) {
-        // map: prefixSum value -> how many times that exact sum has occurred so far
-        Map<Integer, Integer> prefixCount = new HashMap<>();
 
-        // CRITICAL: a prefix sum of 0 has occurred once "before the array starts"
-        // this handles the case where a subarray STARTING AT INDEX 0 itself sums to k
-        prefixCount.put(0, 1);
+        // Key = prefix sum
+        // Value = list of indices where that prefix sum occurred
+        Map<Integer, List<Integer>> prefixCount = new HashMap<>();
+
+        // Prefix sum 0 occurred before the array started.
+        // Index -1 represents the imaginary position before index 0.
+        // This helps us print subarrays starting at index 0.
+        prefixCount.put(0, new ArrayList<>(List.of(-1)));
 
         int currentSum = 0;
         int count = 0;
 
-        for (int num : nums) {
-            currentSum += num; // extend running prefix sum by current element
+        // i tells us the index of the current number
+        for (int i = 0; i < nums.length; i++) {
 
-            // does a prefix sum of (currentSum - k) exist from some earlier point?
-            // each occurrence represents one valid subarray ending at this position
+            // STEP 1: Add the current number to the running sum
+            currentSum += nums[i];
+
+            // STEP 2: Calculate the prefix sum we need to find
             int needed = currentSum - k;
-            count += prefixCount.getOrDefault(needed, 0);
 
-            // record that currentSum has now occurred one more time
-            prefixCount.put(currentSum, prefixCount.getOrDefault(currentSum, 0) + 1);
+            // STEP 3: Check whether the needed prefix sum exists
+            if (prefixCount.containsKey(needed)) {
+
+                // Get every earlier index where this prefix sum occurred
+                for (int prefixIndex : prefixCount.get(needed)) {
+
+                    // The subarray starts just after the earlier prefix
+                    int start = prefixIndex + 1;
+
+                    // The subarray ends at the current index
+                    int end = i;
+
+                    // We found one valid subarray
+                    count++;
+
+                    // STEP 4: Print its starting index, ending index and values
+                    System.out.println(
+                        "Start index: " + start
+                        + ", End index: " + end
+                        + ", Values: "
+                        + Arrays.toString(
+                            Arrays.copyOfRange(nums, start, end + 1)
+                        )
+                    );
+                }
+            }
+
+            // STEP 5: Save the current prefix sum and its index
+            // Do this AFTER checking for matches.
+            prefixCount
+                .computeIfAbsent(currentSum, x -> new ArrayList<>())
+                .add(i);
         }
 
+        // Return the total number of valid subarrays
         return count;
     }
 }
+
 
 
 // nums = [1, 1, 1], k = 2
